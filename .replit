@@ -1,0 +1,33 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Transcription Service"
+
+[[workflows.workflow]]
+name = "Transcription Service"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "mkdir -p input_wav output_transcripts && python main.py input_wav output_transcripts"
+
+[deployment]
+run = ["sh", "-c", "mkdir -p input_wav output_transcripts && python main.py input_wav output_transcripts"]

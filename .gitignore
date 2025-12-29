@@ -1,0 +1,8 @@
+input_wav/
+txtfiles/
+transcripts/
+.upm/
+.local/
+.cache/
+__pycache__/
+.pythonlibs/
